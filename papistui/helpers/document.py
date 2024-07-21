@@ -30,8 +30,8 @@ def alias(self, field):
 Document.alias = alias
 
 
-def foreach(self, field, style, sep=" ", split=", "):
-    """ Specify individual format for entries in list
+def foreach(self, field, style, sep=" ", split=", ", exclude_list=[]):
+    """Specify individual format for entries in list
 
     :param field: str document field/key to be used
     :param style: str style to be applied to each element in list
@@ -50,7 +50,7 @@ def foreach(self, field, style, sep=" ", split=", "):
 
         results = []
         for element in elements:
-            if element != "":
+            if element != "" and element not in exclude_list:
                 results.append(style.replace("{}", element))
 
         return sep.join(results)
